@@ -1,0 +1,66 @@
+'use strict';
+/****************** inilize ************************************** */
+
+let table = document.getElementById('table');
+
+let headArr =[];
+let th=null;
+
+/********************** template ****************************/
+
+function Donor(name,amount,age){
+
+  this.name = name;
+  this.amount = amount;
+  this.age = age;
+
+  Donors.allDonors.push(this);
+}
+
+Donor.allDonors = [];
+
+/************************** form *******************************/
+
+let form = document.getElementById('form');
+
+form.addEventListener('submit',function (e){
+
+  DonorName = e.target.name.value;
+  amount = e.target.select.value;
+
+  new Donor(DonorName,amount,generateRandom())
+
+})
+
+/************************ functions ***************************/
+
+// random number function
+
+function generateRandom(){
+  return Math.floor(Math.random() * (30 - 18) + 18);
+}
+
+// render function
+Donor.prototype.render = function (){
+
+
+
+}
+
+// header function
+
+function HeaderRow(){
+
+  let tr1 = document.createElement('tr');
+  table.appendChild(tr1);
+
+  headArr = ['Donor Name','Donor Age','Amount'];
+
+  for(let i=0; i< headArr.length;i++){
+    th = document.createElement('th');
+    tr1.appendChild(th);
+    th.textContent=headArr[i];
+  }
+}
+
+HeaderRow()
