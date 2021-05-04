@@ -4,7 +4,10 @@
 let table = document.getElementById('table');
 
 let headArr =[];
-let th=null;
+let th = null;
+let td = null;
+let DonorName='';
+let amount='';
 
 /********************** template ****************************/
 
@@ -14,7 +17,7 @@ function Donor(name,amount,age){
   this.amount = amount;
   this.age = age;
 
-  Donors.allDonors.push(this);
+  Donor.allDonors.push(this);
 }
 
 Donor.allDonors = [];
@@ -24,11 +27,12 @@ Donor.allDonors = [];
 let form = document.getElementById('form');
 
 form.addEventListener('submit',function (e){
+  e.preventDefault();
 
   DonorName = e.target.name.value;
   amount = e.target.select.value;
 
-  new Donor(DonorName,amount,generateRandom())
+  new Donor(DonorName,amount,generateRandom()).render();
 
 })
 
@@ -43,7 +47,20 @@ function generateRandom(){
 // render function
 Donor.prototype.render = function (){
 
+  let tr2 = document.createElement('tr');
+  table.appendChild(tr2);
 
+  td = document.createElement('td');
+  tr2.appendChild(td);
+  td.textContent = this.name;
+
+  td = document.createElement('td');
+  tr2.appendChild(td);
+  td.textContent = this.age;
+
+  td = document.createElement('td');
+  tr2.appendChild(td);
+  td.textContent = this.amount;
 
 }
 
@@ -64,3 +81,17 @@ function HeaderRow(){
 }
 
 HeaderRow()
+
+// render function 
+
+function callRender() {
+
+  for(let i=0; i<Donor.allDonors.length;i++){
+    Donor.allDonors[i].render();
+  }
+}
+callRender() 
+
+
+
+/*************************** local storage *******************************/
